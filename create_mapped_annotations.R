@@ -21,4 +21,11 @@ for (i in 1:iterations){
 
 # View(master_time_list)
 
+data_label_master <- as.data.frame(master_time_list)
+
+names(data_label_master) <- "TIME_STAMP"
+
+user1_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp1_labels/Exp1_only_labels.csv", header = TRUE, sep = ",")
+
+user2_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels/Exp2_only_labels.csv", header = TRUE, sep = ",")
 
