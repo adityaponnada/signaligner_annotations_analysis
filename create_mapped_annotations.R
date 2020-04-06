@@ -2,6 +2,7 @@
 library(reshape2)
 library(dplyr)
 library(plyr)
+library(irrCAC)
 options(digits.secs = 3)
 
 ## Create a master time stamp list
@@ -67,5 +68,9 @@ for (i in 1:nrow(data_label_master)){
   
 }
 
-# head(data_label_master)
+# Computing agreement between the annotators
+label_set <- data_label_master[, -1]
 
+stats_val <- krippen.alpha.raw(label_set, weights = "unweighted", categ.labels = c("Sleep", "Wear", "Nonwear"))
+
+stats_val$est$coeff.val
