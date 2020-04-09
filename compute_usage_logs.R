@@ -6,16 +6,18 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Exp1_labels/playlog"
+play_log_filename = "Exp2_labels/playlog"
 
 ## test read as a df
 log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)
 names(log_file) <- "LOG_JSON"
-log_file$UPDATED_JSON <- paste0("[", log_file$LOG_JSON, "]")
-
-log_file$UPDATED_JSON <- lapply(log_file$LOG_JSON, fromJSON)
+# log_file$UPDATED_JSON <- paste0("[", log_file$LOG_JSON, "]")
+# 
+# log_file$UPDATED_JSON <- lapply(log_file$LOG_JSON, fromJSON)
 
 res <- jsonlite::stream_in(textConnection(as.character(log_file$LOG_JSON)))
+
+### Exp 2 took 36.33 min to label
 
 ### Compute change in labels
 head(user_labels)
@@ -43,6 +45,8 @@ nonwear_dff = user_aggregate$x[user_aggregate$Category == "Nonwear"][[1]] - algo
 sleep_dff = user_aggregate$x[user_aggregate$Category == "Sleep"][[1]] - algo_aggregate$x[algo_aggregate$Category == "Sleep"][[1]]
 wear_diff = user_aggregate$x[user_aggregate$Category == "Wear"][[1]] - algo_aggregate$x[algo_aggregate$Category == "Wear"][[1]]
 
-
+## Results
+## Exp 1 added 18656.2 secs of non-wear, reduced (-56695.2 secs) of sleep labels, and added 38850 secs of wear labels
+## Exp 2 added 8760.15 secsof non-wear, reduced -83345.4 secs of sleep labels, and added 74508.4 secs of wear labels
 
 
