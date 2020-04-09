@@ -8,7 +8,7 @@ library(plyr)
 ## Import labels file
 user_label_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
 
-folder_name = "Exp1_labels/"
+folder_name = "Exp2_labels/"
 
 label_file_name = "LeftWrist_TAS1E23150023_2019_06_27_RAW.csv"
 
@@ -20,5 +20,5 @@ user_only_labels <- subset(user_labels, user_labels$SOURCE == "Player")
 algo_only_labels <- subset(user_labels, user_labels$SOURCE == "Algo")
 
 ## Save the files
-write.csv(user_only_labels, file = paste0(user_label_path, folder_name, "Exp1_only_labels.csv"), row.names = FALSE, sep = ",")
-write.csv(algo_only_labels, file = paste0(user_label_path, folder_name, "Algo1_only_labels.csv"), row.names = FALSE, sep = ",")
+write.csv(user_only_labels, file = paste0(user_label_path, folder_name, "Exp2_only_labels.csv"), row.names = FALSE, sep = ",")
+write.csv(algo_only_labels, file = paste0(user_label_path, folder_name, "Algo2_only_labels.csv"), row.names = FALSE, sep = ",")

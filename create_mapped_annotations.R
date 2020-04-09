@@ -76,7 +76,10 @@ label_set <- data_label_master[, -1]
 stats_val <- krippen.alpha.raw(label_set, weights = "unweighted", categ.labels = c("Sleep", "Wear", "Nonwear"))
 
 stats_val$est$coeff.val
+## Agreement: 0.85(CI: 0.84, 0.87), p <0.001
+
 
 ### Save the label_set file
 write.csv(label_set, file = paste0(user_label_path, "label_set_file.csv"), row.names = FALSE, sep = ",")
+write.csv(data_label_master, file = paste0(user_label_path, "data_label_master.csv"), row.names = FALSE, sep = ",")
 
