@@ -6,7 +6,7 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Exp2_labels/playlog"
+play_log_filename = "Exp1_labels/playlog"
 
 ## test read as a df
 log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)
@@ -16,6 +16,8 @@ names(log_file) <- "LOG_JSON"
 # log_file$UPDATED_JSON <- lapply(log_file$LOG_JSON, fromJSON)
 
 res <- jsonlite::stream_in(textConnection(as.character(log_file$LOG_JSON)))
+
+res <- subset(res, res$dataset == "LeftWrist_TAS1E23150023_2019_06_27_RAW")
 
 ### Exp 2 took 36.33 min to label
 
@@ -49,4 +51,15 @@ wear_diff = user_aggregate$x[user_aggregate$Category == "Wear"][[1]] - algo_aggr
 ## Exp 1 added 18656.2 secs of non-wear, reduced (-56695.2 secs) of sleep labels, and added 38850 secs of wear labels
 ## Exp 2 added 8760.15 secsof non-wear, reduced -83345.4 secs of sleep labels, and added 74508.4 secs of wear labels
 
+## Compute time spent labeling
+time_taken_labeling <- (res$time[nrow(res)] - res$time[1])/(1000*60)
+## Exp 2 took 36.33 min to label in one session
+## Exp 1 took 81.76 min to label in two sessions, 67.5 min in the first, 13.33 min in the second session
+
+## create subsets for run
+res_session_1 <- subset(res, res$run == "QG9P77TCO5")
+res_session_2 <- subset(res, res$run == "BE4QC1X7J9")
+
+time_session_1 <- (res_session_1$time[nrow(res_session_1)] - res_session_1$time[1])/(1000*60)
+time_session_2 <- (res_session_2$time[nrow(res_session_2)] - res_session_2$time[1])/(1000*60)
 
