@@ -76,5 +76,7 @@ for (i in 1:nrow(res_tick)){
 min_zoom_accessed = min(zoom_list)
 max_zoom_accessed = max(zoom_list)
 
+table(zoom_list)
+
 # Exp 1 min zoom - 2, and max zoom 7
 # Exp 2 min zoom - 1, and max zoom 7 
