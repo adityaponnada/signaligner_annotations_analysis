@@ -6,7 +6,7 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Exp1_labels/playlog"
+play_log_filename = "Exp2_labels/playlog"
 
 ## test read as a df
 log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)
@@ -63,3 +63,18 @@ res_session_2 <- subset(res, res$run == "BE4QC1X7J9")
 time_session_1 <- (res_session_1$time[nrow(res_session_1)] - res_session_1$time[1])/(1000*60)
 time_session_2 <- (res_session_2$time[nrow(res_session_2)] - res_session_2$time[1])/(1000*60)
 
+
+### Compute zoom access information for botht the experts
+
+### include ticks only
+res_tick <- subset(res, res$type == "tick")
+zoom_list <- c()
+for (i in 1:nrow(res_tick)){
+  zoom_list <- c(zoom_list, res_tick$info$zoom[[i]][1])
+}
+
+min_zoom_accessed = min(zoom_list)
+max_zoom_accessed = max(zoom_list)
+
+# Exp 1 min zoom - 2, and max zoom 7
+# Exp 2 min zoom - 1, and max zoom 7 
