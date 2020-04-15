@@ -50,4 +50,36 @@ for (i in 1:nrow(feature_file)){
   
 }
 
+## Create a researcher specific label map
+## Use data_label_master file to per second label
+
+# For exp 1:
+### Add mapped labels
+feature_file$EXP_1_LABELS <- NA
+feature_file$EXP_2_LABELS <- NA
+
+for (i in 1:nrow(feature_file)){
+  temp_subset <- subset(data_label_master, data_label_master$TIME_STAMP >= feature_file$START_TIME[i] & data_label_master$TIME_STAMP < feature_file$STOP_TIME[i])
+  temp_subset$EXP_1_LABELS <- factor(temp_subset$EXP_1_LABELS)
+  temp_subset$EXP_2_LABELS <- factor(temp_subset$EXP_2_LABELS)
+  if (nrow(temp_subset) > 0){
+    test_table_1 <- table(temp_subset$EXP_1_LABELS)
+    feature_file$EXP_1_LABELS[i] <- names(test_table_1)[test_table_1==max(test_table_1)]
+    test_table_2 <- table(temp_subset$EXP_2_LABELS)
+    feature_file$EXP_2_LABELS[i] <- names(test_table_2)[test_table_2==max(test_table_2)]
+    
+  }
+  else {
+    feature_file$EXP_1_LABELS[i] <- "Unknown"
+    feature_file$EXP_2_LABELS[i] <- "Unkown"
+  }
+  
+}
+
+
 write.csv(feature_file, file = "D:/Signaligner_Test_Datasets/MISC/IEEEvis_Datasets/STEPHEN_WRIST_DATA/labeled_windows_file.csv", row.names = FALSE, sep = ",")
+
+
+
+
+
