@@ -53,10 +53,14 @@ for (i in 1:nrow(feature_file)){
 ## Create a researcher specific label map
 ## Use data_label_master file to per second label
 
+## Also add gt labels to it
+
+
 # For exp 1:
 ### Add mapped labels
 feature_file$EXP_1_LABELS <- NA
 feature_file$EXP_2_LABELS <- NA
+## Add gt labels here
 
 for (i in 1:nrow(feature_file)){
   temp_subset <- subset(data_label_master, data_label_master$TIME_STAMP >= feature_file$START_TIME[i] & data_label_master$TIME_STAMP < feature_file$STOP_TIME[i])
