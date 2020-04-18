@@ -32,6 +32,8 @@ user1_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp1_l
 
 user2_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels/Exp2_only_labels.csv", header = TRUE, sep = ",")
 
+## Create a gt file here
+
 user1_labels$START_TIME <- as.POSIXct(user1_labels$START_TIME, format = "%Y-%m-%d %H:%M:%OS")
 user1_labels$STOP_TIME <- as.POSIXct(user1_labels$STOP_TIME, format = "%Y-%m-%d %H:%M:%OS")
 user2_labels$START_TIME <- as.POSIXct(user2_labels$START_TIME, format = "%Y-%m-%d %H:%M:%OS")
@@ -54,7 +56,7 @@ for (i in 1:nrow(data_label_master)){
   
 }
 
-## Get user 1 labels mapped to master time stamp list
+## Get user 2 labels mapped to master time stamp list
 data_label_master$EXP_2_LABELS <- NA
 data_label_master$EXP_2_LABELS <- as.character(data_label_master$EXP_2_LABELS)
 
@@ -70,6 +72,11 @@ for (i in 1:nrow(data_label_master)){
   
 }
 
+### Get gt labels mapped to master time stamp list
+
+# copy the code from above t create the mapped file
+
+
 # Computing agreement between the annotators
 label_set <- data_label_master[, -1]
 
@@ -77,6 +84,15 @@ stats_val <- krippen.alpha.raw(label_set, weights = "unweighted", categ.labels =
 
 stats_val$est$coeff.val
 ## Agreement: 0.85(CI: 0.84, 0.87), p <0.001
+
+
+## Create a subset with gt and exp1
+
+## compute agreement between gt and exp1
+
+## Create a subset with gt and exp2
+
+## compute agreement between gt and exp2
 
 
 ### Save the label_set file

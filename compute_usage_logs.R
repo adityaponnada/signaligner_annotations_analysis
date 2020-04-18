@@ -6,7 +6,7 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Exp2_labels/playlog"
+play_log_filename = "Exp2_labels/playlog" ## Compute the playlog for gt here 
 
 ## test read as a df
 log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)
@@ -55,6 +55,9 @@ wear_diff = user_aggregate$x[user_aggregate$Category == "Wear"][[1]] - algo_aggr
 time_taken_labeling <- (res$time[nrow(res)] - res$time[1])/(1000*60)
 ## Exp 2 took 36.33 min to label in one session
 ## Exp 1 took 81.76 min to label in two sessions, 67.5 min in the first, 13.33 min in the second session
+
+
+## Check session numbers for gt here 
 
 ## create subsets for run
 res_session_1 <- subset(res, res$run == "QG9P77TCO5")
