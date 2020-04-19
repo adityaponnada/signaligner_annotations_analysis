@@ -32,3 +32,8 @@ final_label_df <- json_label_df[, c(4:8)]
 
 
 write.csv(final_label_df, file = "D:/Signaligner_Test_Datasets/Expert_labels/Ground_truth_labels/ground_truth_labels.csv", row.names = FALSE, sep = ",")
+
+
+
+final_label_df$DIFF_TIME <- difftime(final_label_df$STOP_TIME, final_label_df$START_TIME, units = "secs")
+final_gt_aggregate <- aggregate(final_label_df$DIFF_TIME, by=list(Category = final_label_df$PREDICTION), FUN = sum)
