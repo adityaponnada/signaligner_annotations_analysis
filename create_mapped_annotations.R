@@ -122,12 +122,18 @@ stats_val$est$coeff.val
 
 
 ## Create a subset with gt and exp1
+gt_exp1_set <- data_label_master[, c("EXP_1_LABELS", "GROUND_TRUTH")]
+stats_val_gt_exp1 <- krippen.alpha.raw(gt_exp1_set, weights = "unweighted", categ.labels = c("Sleep", "Wear", "Nonwear"))
 
-## compute agreement between gt and exp1
+stats_val_gt_exp1$est$coeff.val
 
 ## Create a subset with gt and exp2
 
 ## compute agreement between gt and exp2
+gt_exp2_set <- data_label_master[, c("EXP_2_LABELS", "GROUND_TRUTH")]
+stats_val_gt_exp2 <- krippen.alpha.raw(gt_exp2_set, weights = "unweighted", categ.labels = c("Sleep", "Wear", "Nonwear"))
+
+stats_val_gt_exp2$est$coeff.val
 
 
 ### Save the label_set file
