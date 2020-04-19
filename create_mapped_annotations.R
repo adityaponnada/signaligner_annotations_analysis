@@ -94,6 +94,24 @@ for (i in 1:nrow(data_label_master)){
   
 }
 
+### Get algo labels mapped to master time stamp list
+
+# copy the code from above algo create the mapped file
+data_label_master$OLD_SWAN <- NA
+data_label_master$OLD_SWAN <- as.character(data_label_master$OLD_SWAN)
+
+for (i in 1:nrow(data_label_master)){
+  time_stamp <- data_label_master$TIME_STAMP[i]
+  for (j in 1:nrow(algo_only_labels)){
+    if (algo_only_labels$START_TIME[j] <= time_stamp && time_stamp < algo_only_labels$STOP_TIME[j]){
+      # print("Condition met")
+      data_label_master$OLD_SWAN[i] = as.character(algo_only_labels$PREDICTION[j])
+      break
+    }
+  }
+  
+}
+
 # Computing agreement between the annotators
 label_set <- data_label_master[, -1]
 
