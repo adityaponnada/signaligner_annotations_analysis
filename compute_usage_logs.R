@@ -6,7 +6,7 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Exp2_labels/playlog" ## Compute the playlog for gt here 
+play_log_filename = "Ground_truth_labels/playlog" ## Compute the playlog for gt here 
 
 ## test read as a df
 log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)
@@ -60,8 +60,8 @@ time_taken_labeling <- (res$time[nrow(res)] - res$time[1])/(1000*60)
 ## Check session numbers for gt here 
 
 ## create subsets for run
-res_session_1 <- subset(res, res$run == "QG9P77TCO5")
-res_session_2 <- subset(res, res$run == "BE4QC1X7J9")
+res_session_1 <- subset(res, res$run == "F8WYK3N7W8")
+res_session_2 <- subset(res, res$run == "XCPZX8UWR3")
 
 time_session_1 <- (res_session_1$time[nrow(res_session_1)] - res_session_1$time[1])/(1000*60)
 time_session_2 <- (res_session_2$time[nrow(res_session_2)] - res_session_2$time[1])/(1000*60)
@@ -80,6 +80,19 @@ min_zoom_accessed = min(zoom_list)
 max_zoom_accessed = max(zoom_list)
 
 table(zoom_list)
+
+plot(table(zoom_list))
+
+plot(zoom_list)
+
+zoom_df <- as.data.frame(zoom_list)
+zoom_df$seq <- c(1:nrow(zoom_df))
+
+plot(zoom_df$zoom_list, zoom_df$seq)
+
+hist(zoom_list)
+
+barplot(zoom_df$zoom_list, xlab = "Event sequence", ylab = "Zoom level")
 
 # Exp 1 min zoom - 2, and max zoom 7
 # Exp 2 min zoom - 1, and max zoom 7 
