@@ -33,11 +33,15 @@ user1_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp1_l
 user2_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels/Exp2_only_labels.csv", header = TRUE, sep = ",")
 
 ## Create a gt file here
+ground_truth_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Ground_truth_labels/ground_truth_labels.csv", header = TRUE, sep = ",")
 
 user1_labels$START_TIME <- as.POSIXct(user1_labels$START_TIME, format = "%Y-%m-%d %H:%M:%OS")
 user1_labels$STOP_TIME <- as.POSIXct(user1_labels$STOP_TIME, format = "%Y-%m-%d %H:%M:%OS")
 user2_labels$START_TIME <- as.POSIXct(user2_labels$START_TIME, format = "%Y-%m-%d %H:%M:%OS")
 user2_labels$STOP_TIME <- as.POSIXct(user2_labels$STOP_TIME, format = "%Y-%m-%d %H:%M:%OS")
+
+ground_truth_labels$START_TIME <- as.POSIXct(ground_truth_labels$START_TIME, format = "%Y-%m-%d %H:%M:%OS")
+ground_truth_labels$STOP_TIME <- as.POSIXct(ground_truth_labels$STOP_TIME, format = "%Y-%m-%d %H:%M:%OS")
 
 
 ## Get user 1 labels mapped to master time stamp list
@@ -75,7 +79,38 @@ for (i in 1:nrow(data_label_master)){
 ### Get gt labels mapped to master time stamp list
 
 # copy the code from above t create the mapped file
+data_label_master$GROUND_TRUTH <- NA
+data_label_master$GROUND_TRUTH <- as.character(data_label_master$GROUND_TRUTH)
 
+for (i in 1:nrow(data_label_master)){
+  time_stamp <- data_label_master$TIME_STAMP[i]
+  for (j in 1:nrow(ground_truth_labels)){
+    if (ground_truth_labels$START_TIME[j] <= time_stamp && time_stamp < ground_truth_labels$STOP_TIME[j]){
+      # print("Condition met")
+      data_label_master$GROUND_TRUTH[i] = as.character(ground_truth_labels$PREDICTION[j])
+      break
+    }
+  }
+  
+}
+
+### Get algo labels mapped to master time stamp list
+
+# copy the code from above algo create the mapped file
+data_label_master$OLD_SWAN <- NA
+data_label_master$OLD_SWAN <- as.character(data_label_master$OLD_SWAN)
+
+for (i in 1:nrow(data_label_master)){
+  time_stamp <- data_label_master$TIME_STAMP[i]
+  for (j in 1:nrow(algo_only_labels)){
+    if (algo_only_labels$START_TIME[j] <= time_stamp && time_stamp < algo_only_labels$STOP_TIME[j]){
+      # print("Condition met")
+      data_label_master$OLD_SWAN[i] = as.character(algo_only_labels$PREDICTION[j])
+      break
+    }
+  }
+  
+}
 
 # Computing agreement between the annotators
 label_set <- data_label_master[, -1]

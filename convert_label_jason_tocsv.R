@@ -3,7 +3,8 @@ library(rjson)
 library(jsonlite)
 
 ## read the json file
-label_json <- fromJSON(file="C:/Users/Aditya/Documents/SignalignerData/labelsets/StephenRightWristWearNonwearSleep3/DEFAULT/labels.latest.json")
+label_json <- rjson::fromJSON(file="D:/Signaligner_Test_Datasets/Expert_labels/label_set_gt/labelsets/SignalignerData/DEFAULT/labels.latest.json")
+
 
 ## Create a data frame of the following format
 
@@ -28,3 +29,6 @@ json_label_df$LABELSET <- "DEFAULT"
 
 ## Only keep the relevant columns
 final_label_df <- json_label_df[, c(4:8)]
+
+
+write.csv(final_label_df, file = "D:/Signaligner_Test_Datasets/Expert_labels/Ground_truth_labels/ground_truth_labels.csv", row.names = FALSE, sep = ",")

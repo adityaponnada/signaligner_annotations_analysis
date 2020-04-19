@@ -61,21 +61,31 @@ for (i in 1:nrow(feature_file)){
 feature_file$EXP_1_LABELS <- NA
 feature_file$EXP_2_LABELS <- NA
 ## Add gt labels here
+feature_file$GROUND_TRUTH <- NA
+feature_file$OLD_SWAN <- NA
 
 for (i in 1:nrow(feature_file)){
   temp_subset <- subset(data_label_master, data_label_master$TIME_STAMP >= feature_file$START_TIME[i] & data_label_master$TIME_STAMP < feature_file$STOP_TIME[i])
   temp_subset$EXP_1_LABELS <- factor(temp_subset$EXP_1_LABELS)
   temp_subset$EXP_2_LABELS <- factor(temp_subset$EXP_2_LABELS)
+  temp_subset$GROUND_TRUTH <- factor(temp_subset$GROUND_TRUTH)
+  temp_subset$OLD_SWAN <- factor(temp_subset$OLD_SWAN)
   if (nrow(temp_subset) > 0){
     test_table_1 <- table(temp_subset$EXP_1_LABELS)
     feature_file$EXP_1_LABELS[i] <- names(test_table_1)[test_table_1==max(test_table_1)]
     test_table_2 <- table(temp_subset$EXP_2_LABELS)
     feature_file$EXP_2_LABELS[i] <- names(test_table_2)[test_table_2==max(test_table_2)]
+    test_table_gt <- table(temp_subset$GROUND_TRUTH)
+    feature_file$GROUND_TRUTH[i] <- names(test_table_gt)[test_table_gt==max(test_table_gt)]
+    test_table_old_swan <- table(temp_subset$OLD_SWAN)
+    feature_file$OLD_SWAN[i] <- names(test_table_old_swan)[test_table_old_swan==max(test_table_old_swan)]
     
   }
   else {
     feature_file$EXP_1_LABELS[i] <- "Unknown"
-    feature_file$EXP_2_LABELS[i] <- "Unkown"
+    feature_file$EXP_2_LABELS[i] <- "Unknown"
+    feature_file$GROUND_TRUTH[i] <- "Unknown"
+    feature_file$OLD_SWAN[i] <- "Unknown"
   }
   
 }
