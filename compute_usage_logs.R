@@ -81,5 +81,16 @@ max_zoom_accessed = max(zoom_list)
 
 table(zoom_list)
 
+plot(table(zoom_list))
+
+plot(zoom_list)
+
+zoom_df <- as.data.frame(zoom_list)
+zoom_df$seq <- c(1:nrow(zoom_df))
+
+plot(zoom_df$zoom_list, zoom_df$seq)
+
+barplot(zoom_df$zoom_list, xlab = "Event sequence". ylab = "Zoom level")
+
 # Exp 1 min zoom - 2, and max zoom 7
 # Exp 2 min zoom - 1, and max zoom 7 
