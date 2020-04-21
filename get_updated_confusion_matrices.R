@@ -31,11 +31,20 @@ new_swan_file$OLD_SWAN[new_swan_file$PREDICTED_SMOOTH == 0] <- "Wear"
 new_swan_file$OLD_SWAN[new_swan_file$PREDICTED_SMOOTH == 1] <- "Sleep"
 new_swan_file$OLD_SWAN[new_swan_file$PREDICTED_SMOOTH == 2] <- "Nonwear"
 
+
+## Convert columns to factors
+old_swan_file$GROUND_TRUTH <- as.factor(old_swan_file$GROUND_TRUTH)
+old_swan_file$OLD_SWAN <- as.factor(old_swan_file$OLD_SWAN)
+
+new_swan_file$GROUND_TRUTH <- as.factor(new_swan_file$GROUND_TRUTH)
+new_swan_file$OLD_SWAN <- as.factor(new_swan_file$OLD_SWAN)
+
+
 ### Generate confusion matrices
 
 # 1. old swan vs ground truth
-
+old_swan_matrix <- confusionMatrix(old_swan_file$OLD_SWAN, old_swan_file$GROUND_TRUTH, mode = "prec_recall")
 
 
 # 2. new swan vs ground truth
-
+new_swan_matrix <- confusionMatrix(new_swan_file$OLD_SWAN, new_swan_file$GROUND_TRUTH, mode = "prec_recall")
