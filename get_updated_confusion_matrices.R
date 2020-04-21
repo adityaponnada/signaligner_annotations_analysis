@@ -22,3 +22,20 @@ old_swan_file$GROUND_TRUTH[old_swan_file$TRUE. == 2] <- "Nonwear"
 old_swan_file$OLD_SWAN[old_swan_file$PREDICTED_SMOOTH == 0] <- "Wear"
 old_swan_file$OLD_SWAN[old_swan_file$PREDICTED_SMOOTH == 1] <- "Sleep"
 old_swan_file$OLD_SWAN[old_swan_file$PREDICTED_SMOOTH == 2] <- "Nonwear"
+
+new_swan_file$GROUND_TRUTH[new_swan_file$TRUE. == 0] <- "Wear"
+new_swan_file$GROUND_TRUTH[new_swan_file$TRUE. == 1] <- "Sleep"
+new_swan_file$GROUND_TRUTH[new_swan_file$TRUE. == 2] <- "Nonwear"
+
+new_swan_file$OLD_SWAN[new_swan_file$PREDICTED_SMOOTH == 0] <- "Wear"
+new_swan_file$OLD_SWAN[new_swan_file$PREDICTED_SMOOTH == 1] <- "Sleep"
+new_swan_file$OLD_SWAN[new_swan_file$PREDICTED_SMOOTH == 2] <- "Nonwear"
+
+### Generate confusion matrices
+
+# 1. old swan vs ground truth
+
+
+
+# 2. new swan vs ground truth
+
