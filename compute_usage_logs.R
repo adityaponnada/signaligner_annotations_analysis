@@ -100,7 +100,10 @@ zoom_df$zoom_level <- max_zoom_accessed - zoom_df$zoom_list
 zoom_df$time_from_start <- zoom_df$seq*10 - 10
 
 ## Plot the zoom sequence
-
+ggplot(zoom_df, aes(x=time_from_start, y=zoom_level)) + geom_line(stat = "identity") +
+  labs(title="R2 zoom interactions", x="\nTime spent labeling (secs)", y="\nZoom level accessed") + theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+  ## theme(axis.text.x=element_text(angle = 70, hjust = 1))
 
 # Exp 1 min zoom - 2, and max zoom 7
 # Exp 2 min zoom - 1, and max zoom 7 
