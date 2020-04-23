@@ -6,7 +6,7 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Exp1_labels/playlog" ## Compute the playlog for gt here 
+play_log_filename = "Ground_truth_labels/playlog" ## Compute the playlog for gt here 
 
 ## test read as a df
 log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)
@@ -60,8 +60,8 @@ time_taken_labeling <- (res$time[nrow(res)] - res$time[1])/(1000*60)
 ## Check session numbers for gt here 
 
 ## create subsets for run
-res_session_1 <- subset(res, res$run == "QG9P77TCO5")
-res_session_2 <- subset(res, res$run == "BE4QC1X7J9")
+res_session_1 <- subset(res, res$run == "F8WYK3N7W8")
+res_session_2 <- subset(res, res$run == "XCPZX8UWR3")
 
 time_session_1 <- (res_session_1$time[nrow(res_session_1)] - res_session_1$time[1])/(1000*60)
 time_session_2 <- (res_session_2$time[nrow(res_session_2)] - res_session_2$time[1])/(1000*60)
@@ -101,7 +101,7 @@ zoom_df$time_from_start <- zoom_df$seq*10 - 10
 
 ## Plot the zoom sequence
 ggplot(zoom_df, aes(x=time_from_start, y=zoom_level)) + geom_line(stat = "identity") +
-  labs(title="R2 zoom interactions", x="\nTime spent labeling (secs)", y="\nZoom level accessed") + theme_bw() +
+  labs(title="R1 zoom interactions", x="\nTime spent labeling (secs)", y="\nZoom level accessed") + theme_bw() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
   ## theme(axis.text.x=element_text(angle = 70, hjust = 1))
 
