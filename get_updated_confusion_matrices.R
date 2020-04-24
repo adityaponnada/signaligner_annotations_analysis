@@ -48,3 +48,31 @@ old_swan_matrix <- confusionMatrix(old_swan_file$OLD_SWAN, old_swan_file$GROUND_
 
 # 2. new swan vs ground truth
 new_swan_matrix <- confusionMatrix(new_swan_file$OLD_SWAN, new_swan_file$GROUND_TRUTH, mode = "prec_recall")
+
+
+### Check consensus, R2, and R3 vs the OLD_SWAN labels
+
+# first get the R2, R3. and consensus labels
+user_labels_from_feature <- feature_file[, c("LABEL_CONSENSUS", "EXP_1_LABELS", "EXP_2_LABELS")] 
+
+user_labels_from_feature$LABEL_CONSENSUS <- as.factor(user_labels_from_feature$LABEL_CONSENSUS)
+user_labels_from_feature$EXP_1_LABELS <- as.factor(user_labels_from_feature$EXP_1_LABELS)
+user_labels_from_feature$EXP_2_LABELS <- as.factor(user_labels_from_feature$EXP_2_LABELS)
+
+
+old_swan_consensus <- confusionMatrix(old_swan_file$OLD_SWAN, user_labels_from_feature$LABEL_CONSENSUS, mode = "prec_recall")
+
+old_swan_exp_1 <- confusionMatrix(old_swan_file$OLD_SWAN, user_labels_from_feature$EXP_1_LABELS, mode = "prec_recall")
+
+old_swan_exp_2 <- confusionMatrix(old_swan_file$OLD_SWAN, user_labels_from_feature$EXP_2_LABELS, mode = "prec_recall")
+
+user_labels_from_feature$GROUND_TRUTH <- feature_file$GROUND_TRUTH
+user_labels_from_feature$GROUND_TRUTH <- as.factor(user_labels_from_feature$GROUND_TRUTH)
+
+levels(user_labels_from_feature$GROUND_TRUTH) <- c(levels(user_labels_from_feature$GROUND_TRUTH), "Unknown")
+
+## Compute labeling accuracy using confusion matirces
+
+r1_gt_accuracy <- confusionMatrix(user_labels_from_feature$EXP_1_LABELS, user_labels_from_feature$GROUND_TRUTH, mode = "prec_recall")
+r2_gt_accuracy <- confusionMatrix(user_labels_from_feature$EXP_2_LABELS, user_labels_from_feature$GROUND_TRUTH, mode = "prec_recall")
+cons_gt_accuracy <- confusionMatrix(user_labels_from_feature$LABEL_CONSENSUS, user_labels_from_feature$GROUND_TRUTH, mode = "prec_recall")

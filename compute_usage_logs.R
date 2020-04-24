@@ -6,7 +6,7 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Ground_truth_labels/playlog" ## Compute the playlog for gt here 
+play_log_filename = "Exp2_labels/playlog" ## Compute the playlog for gt here 
 
 ## test read as a df
 log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)
@@ -93,6 +93,20 @@ plot(zoom_df$zoom_list, zoom_df$seq)
 hist(zoom_list)
 
 barplot(zoom_df$zoom_list, xlab = "Event sequence", ylab = "Zoom level")
+
+### Reverse the zoom orders
+zoom_df$zoom_level <- max_zoom_accessed - zoom_df$zoom_list
+## Add a time from begining column
+zoom_df$time_from_start <- zoom_df$seq*10 - 10
+
+## Plot the zoom sequence
+ggplot(zoom_df, aes(x=time_from_start, y=zoom_level)) + geom_line(stat = "identity", alpha = 0.8) +
+  labs(title="R3 zoom interactions", x="\nTime spent labeling (secs)", y="\nZoom level accessed") + theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(size = 12), 
+        axis.title.x = element_text(size=15), 
+        axis.title.y = element_text(size=15)) + ylim(0,7)
+  ## theme(axis.text.x=element_text(angle = 70, hjust = 1))
 
 # Exp 1 min zoom - 2, and max zoom 7
 # Exp 2 min zoom - 1, and max zoom 7 
