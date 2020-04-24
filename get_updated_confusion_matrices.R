@@ -66,3 +66,13 @@ old_swan_exp_1 <- confusionMatrix(old_swan_file$OLD_SWAN, user_labels_from_featu
 
 old_swan_exp_2 <- confusionMatrix(old_swan_file$OLD_SWAN, user_labels_from_feature$EXP_2_LABELS, mode = "prec_recall")
 
+user_labels_from_feature$GROUND_TRUTH <- feature_file$GROUND_TRUTH
+user_labels_from_feature$GROUND_TRUTH <- as.factor(user_labels_from_feature$GROUND_TRUTH)
+
+levels(user_labels_from_feature$GROUND_TRUTH) <- c(levels(user_labels_from_feature$GROUND_TRUTH), "Unknown")
+
+## Compute labeling accuracy using confusion matirces
+
+r1_gt_accuracy <- confusionMatrix(user_labels_from_feature$EXP_1_LABELS, user_labels_from_feature$GROUND_TRUTH, mode = "prec_recall")
+r2_gt_accuracy <- confusionMatrix(user_labels_from_feature$EXP_2_LABELS, user_labels_from_feature$GROUND_TRUTH, mode = "prec_recall")
+cons_gt_accuracy <- confusionMatrix(user_labels_from_feature$LABEL_CONSENSUS, user_labels_from_feature$GROUND_TRUTH, mode = "prec_recall")

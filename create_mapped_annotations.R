@@ -136,6 +136,11 @@ stats_val_gt_exp2 <- krippen.alpha.raw(gt_exp2_set, weights = "unweighted", cate
 stats_val_gt_exp2$est$coeff.val
 
 
+
+## Compute labeling accuracy using confusion matrices
+
+
+
 ### Save the label_set file
 write.csv(label_set, file = paste0(user_label_path, "label_set_file.csv"), row.names = FALSE, sep = ",")
 write.csv(data_label_master, file = paste0(user_label_path, "data_label_master.csv"), row.names = FALSE, sep = ",")
