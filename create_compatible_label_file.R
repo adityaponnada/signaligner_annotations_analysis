@@ -25,6 +25,9 @@ swan_first_pass_predictions$PREDICTED_TEXT[swan_first_pass_predictions$PREDICTED
 
 export_labels_file$PREDICTION <- swan_first_pass_predictions$PREDICTED_TEXT
 
+export_labels_file$LABELSET <- "SWaN_first_pass"
+export_labels_file$SOURCE <- "Algo"
+
 ## Write the file as a csv
 write.csv(export_labels_file, file="D:/Signaligner_Test_Datasets/MISC/IEEEvis_Datasets/STEPHEN_WRIST_DATA/first_pass_swan_labels.csv",
           row.names = FALSE, sep = ",")
