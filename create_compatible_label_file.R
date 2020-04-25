@@ -16,5 +16,15 @@ swan_first_pass_predictions <- read.csv(file="D:/Signaligner_Test_Datasets/MISC/
 
 ## Create a mapped file of start time, end time, label, and other column requirements for Signaligner Pro
 
-## Write the file as a csv
+export_labels_file <- feature_file[, c("START_TIME", "STOP_TIME")]
 
+## COnvert prediction column to character
+swan_first_pass_predictions$PREDICTED_TEXT[swan_first_pass_predictions$PREDICTED == 0] <- "Wear"
+swan_first_pass_predictions$PREDICTED_TEXT[swan_first_pass_predictions$PREDICTED == 1] <- "Sleep"
+swan_first_pass_predictions$PREDICTED_TEXT[swan_first_pass_predictions$PREDICTED == 2] <- "Nonwear"
+
+export_labels_file$PREDICTION <- swan_first_pass_predictions$PREDICTED_TEXT
+
+## Write the file as a csv
+write.csv(export_labels_file, file="D:/Signaligner_Test_Datasets/MISC/IEEEvis_Datasets/STEPHEN_WRIST_DATA/first_pass_swan_labels.csv",
+          row.names = FALSE, sep = ",")
