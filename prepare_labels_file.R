@@ -8,7 +8,7 @@ library(plyr)
 ## Import labels file
 user_label_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
 
-folder_name = "Exp2_labels/" # get the ground truth labels file read here
+folder_name = "Exp2_labels_full_swan_v2/" # get the ground truth labels file read here
 
 label_file_name = "LeftWrist_TAS1E23150023_2019_06_27_RAW.csv"
 

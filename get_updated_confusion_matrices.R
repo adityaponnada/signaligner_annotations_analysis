@@ -66,7 +66,8 @@ old_swan_exp_1 <- confusionMatrix(old_swan_file$OLD_SWAN, user_labels_from_featu
 
 old_swan_exp_2 <- confusionMatrix(old_swan_file$OLD_SWAN, user_labels_from_feature$EXP_2_LABELS, mode = "prec_recall")
 
-user_labels_from_feature$GROUND_TRUTH <- feature_file$GROUND_TRUTH
+# user_labels_from_feature$GROUND_TRUTH <- feature_file$GROUND_TRUTH
+user_labels_from_feature$GROUND_TRUTH <- old_swan_file$GROUND_TRUTH
 user_labels_from_feature$GROUND_TRUTH <- as.factor(user_labels_from_feature$GROUND_TRUTH)
 
 levels(user_labels_from_feature$GROUND_TRUTH) <- c(levels(user_labels_from_feature$GROUND_TRUTH), "Unknown")
