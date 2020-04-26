@@ -5,7 +5,7 @@ library(jsonlite)
 ## read the json file
 ## Use the first one to read the ground truth file
 ## label_json <- rjson::fromJSON(file="D:/Signaligner_Test_Datasets/Expert_labels/label_set_gt/labelsets/SignalignerData/DEFAULT/labels.latest.json")
-label_json <- rjson::fromJSON(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_v2/DEFAULT/labels.latest.json")
+label_json <- rjson::fromJSON(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_ful_swan_v2/DEFAULT/labels.latest.json")
 
 ## Create a data frame of the following format
 
@@ -32,7 +32,7 @@ json_label_df$LABELSET <- "DEFAULT"
 final_label_df <- json_label_df[, c(4:8)]
 
 ## If not converting the ground truth, save it using this path or else use the other path
-write.csv(json_label_df, file = "D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_v2/LeftWrist_TAS1E23150023_2019_06_27_RAW.csv",
+write.csv(final_label_df, file = "D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_v2/LeftWrist_TAS1E23150023_2019_06_27_RAW.csv",
           row.names = FALSE, sep = ",")
 ## write.csv(final_label_df, file = "D:/Signaligner_Test_Datasets/Expert_labels/Ground_truth_labels/ground_truth_labels.csv", row.names = FALSE, sep = ",")
 
