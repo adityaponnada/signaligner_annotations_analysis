@@ -6,7 +6,7 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Exp2_labels/playlog" ## Compute the playlog for gt here 
+play_log_filename = "Exp2_labels_full_swan_v2/playlog" ## Compute the playlog for gt here 
 
 ## test read as a df
 log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)

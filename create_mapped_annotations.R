@@ -30,7 +30,7 @@ names(data_label_master) <- "TIME_STAMP"
 
 user1_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp1_labels/Exp1_only_labels.csv", header = TRUE, sep = ",")
 
-user2_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels/Exp2_only_labels.csv", header = TRUE, sep = ",")
+user2_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_full_swan_v2/Exp2_only_labels.csv", header = TRUE, sep = ",")
 
 ## Create a gt file here
 ground_truth_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Ground_truth_labels/ground_truth_labels.csv", header = TRUE, sep = ",")
@@ -94,7 +94,7 @@ for (i in 1:nrow(data_label_master)){
   
 }
 
-### Get algo labels mapped to master time stamp list
+### Get algo labels mapped to master time stamp list - maybe this step can be skipped
 
 # copy the code from above algo create the mapped file
 data_label_master$OLD_SWAN <- NA
@@ -121,7 +121,7 @@ stats_val$est$coeff.val
 ## Agreement: 0.85(CI: 0.84, 0.87), p <0.001
 
 
-## Create a subset with gt and exp1
+## Create a subset with gt and exp1 - skip this
 gt_exp1_set <- data_label_master[, c("EXP_1_LABELS", "GROUND_TRUTH")]
 stats_val_gt_exp1 <- krippen.alpha.raw(gt_exp1_set, weights = "unweighted", categ.labels = c("Sleep", "Wear", "Nonwear"))
 
@@ -129,7 +129,7 @@ stats_val_gt_exp1$est$coeff.val
 
 ## Create a subset with gt and exp2
 
-## compute agreement between gt and exp2
+## compute agreement between gt and exp2 - skip this
 gt_exp2_set <- data_label_master[, c("EXP_2_LABELS", "GROUND_TRUTH")]
 stats_val_gt_exp2 <- krippen.alpha.raw(gt_exp2_set, weights = "unweighted", categ.labels = c("Sleep", "Wear", "Nonwear"))
 
