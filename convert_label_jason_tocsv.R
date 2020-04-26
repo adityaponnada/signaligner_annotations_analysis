@@ -5,7 +5,7 @@ library(jsonlite)
 ## read the json file
 ## Use the first one to read the ground truth file
 ## label_json <- rjson::fromJSON(file="D:/Signaligner_Test_Datasets/Expert_labels/label_set_gt/labelsets/SignalignerData/DEFAULT/labels.latest.json")
-label_json <- rjson::fromJSON(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_ful_swan_v2/DEFAULT/labels.latest.json")
+label_json <- rjson::fromJSON(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_v2/DEFAULT/labels.latest.json")
 
 ## Create a data frame of the following format
 
