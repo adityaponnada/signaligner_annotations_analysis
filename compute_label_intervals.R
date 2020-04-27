@@ -5,7 +5,7 @@ library(psych)
 options(digits.secs=3)
 
 ## Read file
-annotation_file <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Ground_truth_labels/ground_truth_labels.csv", sep = ",", header = TRUE)
+annotation_file <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_full_swan_v2/Exp2_only_labels.csv", sep = ",", header = TRUE)
 
 ## Convert to date time object
 annotation_file$START_TIME <- as.POSIXct(annotation_file$START_TIME, format="%Y-%m-%d %H:%M:%OS")
@@ -62,6 +62,7 @@ hist(non_wear_subset$DIFF_TIMR)
 
 nrow(final_non_wear) - nrow(model_assumed_non_wear)
 
+## For R1 and R2 consensus, there were only two instances of non-wear agreed on which were more then 15 min long and outside of the sleep range but they were (0,0,0) values assumed to be invalid by the model
 
 
 
