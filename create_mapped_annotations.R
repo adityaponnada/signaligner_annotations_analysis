@@ -28,9 +28,9 @@ data_label_master <- as.data.frame(master_time_list)
 
 names(data_label_master) <- "TIME_STAMP"
 
-user1_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp1_labels/Exp1_only_labels.csv", header = TRUE, sep = ",")
+user1_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp1_labels_v2/Exp1_only_labels.csv", header = TRUE, sep = ",")
 
-user2_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_full_swan_v2/Exp2_only_labels.csv", header = TRUE, sep = ",")
+user2_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Exp2_labels_v2/Exp2_only_labels.csv", header = TRUE, sep = ",")
 
 ## Create a gt file here
 ground_truth_labels <- read.csv(file="D:/Signaligner_Test_Datasets/Expert_labels/Ground_truth_labels/ground_truth_labels.csv", header = TRUE, sep = ",")

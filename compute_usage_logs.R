@@ -6,10 +6,10 @@ library(jsonlite)
 
 ## Read in the play log file
 playlog_path = "D:/Signaligner_Test_Datasets/Expert_labels/"
-play_log_filename = "Exp2_labels_full_swan_v2/playlog" ## Compute the playlog for gt here 
+play_log_filename = "Exp1_labels_v2/playlog" ## Compute the playlog for gt here 
 
 ## test read as a df
-log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 100000)
+log_file <- read.fwf(file=paste0(playlog_path, play_log_filename), widths = 10000000)
 names(log_file) <- "LOG_JSON"
 # log_file$UPDATED_JSON <- paste0("[", log_file$LOG_JSON, "]")
 # 
@@ -101,7 +101,7 @@ zoom_df$time_from_start <- zoom_df$seq*10 - 10
 
 ## Plot the zoom sequence
 ggplot(zoom_df, aes(x=time_from_start, y=zoom_level)) + geom_line(stat = "identity", alpha = 0.8) +
-  labs(title="R3 zoom interactions", x="\nTime spent labeling (secs)", y="\nZoom level accessed") + theme_bw() +
+  labs(title="R2 zoom interactions", x="\nTime spent labeling (secs)", y="\nZoom level accessed") + theme_bw() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.text.x = element_text(size = 12), 
         axis.title.x = element_text(size=15), 
