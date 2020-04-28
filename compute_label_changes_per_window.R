@@ -23,4 +23,29 @@ original_swan_file$GROUND_TRUTH <- as.factor(original_swan_file$GROUND_TRUTH)
 original_swan_file$CORRECTED_SWAN <- as.factor(original_swan_file$CORRECTED_SWAN)
 original_swan_file$ML_SWAN <- as.factor(original_swan_file$ML_SWAN)
 
+## Read the feature file with old R2 and R3 labels - labeling with the corrected SWAN
+expert_labels_corr_swan <- read.csv(file="D:/Signaligner_Test_Datasets/MISC/IEEEvis_Datasets/STEPHEN_WRIST_DATA/labeled_windows_file_incl_consensus_exp_gt_swan.csv", 
+                                    sep = ",", header = TRUE)
+
+
+## Read the feature file with new R2 and R3 labels - labeling with the ML SWAN
+expert_labels_ml_swan <- read.csv(file="D:/Signaligner_Test_Datasets/MISC/IEEEvis_Datasets/STEPHEN_WRIST_DATA/labeled_windows_file.csv", 
+                                    sep = ",", header = TRUE)
+
+
+
+### Rename expert label column names to corr and ml
+colnames(expert_labels_corr_swan)[which(names(expert_labels_corr_swan) == "EXP_1_LABELS")] <- "EXP_1_CORR_LABELS"
+colnames(expert_labels_corr_swan)[which(names(expert_labels_corr_swan) == "EXP_2_LABELS")] <- "EXP_2_CORR_LABELS"
+colnames(expert_labels_ml_swan)[which(names(expert_labels_ml_swan) == "EXP_1_LABELS")] <- "EXP_1_ML_LABELS"
+colnames(expert_labels_ml_swan)[which(names(expert_labels_ml_swan) == "EXP_2_LABELS")] <- "EXP_2_ML_LABELS"
+
+### Create a mapped data frame of all the labels
+mapped_annotation_windows <- original_swan_file[, c("GROUND_TRUTH", "CORRECTED_SWAN", "ML_SWAN")]
+mapped_annotation_windows$EXP_1_CORR_LABELS <- expert_labels_corr_swan$EXP_1_CORR_LABELS
+mapped_annotation_windows$EXP_2_CORR_LABELS <- expert_labels_corr_swan$EXP_2_CORR_LABELS
+mapped_annotation_windows$EXP_1_ML_LABELS <- expert_labels_ml_swan$EXP_1_ML_LABELS
+mapped_annotation_windows$EXP_2_ML_LABELS <- expert_labels_ml_swan$EXP_2_ML_LABELS
+
+
 
